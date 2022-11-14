@@ -4,14 +4,15 @@ import {TaskType} from './App';
 type TodoListType = {
     title: string,
     tasks: Array<TaskType>
+    removeTask: (tId: number) => void
 }
 
 
-const TodoList = ({title, tasks}: TodoListType) => {
+const TodoList = ({title, tasks, removeTask}: TodoListType) => {
 
     const tasksElements = tasks.map(
         t => <li key={t.id}><input type="checkbox" checked={t.isDone}/> <span>{t.title}</span>
-            <button onClick={() => alert(t.id)}>X</button>
+            <button onClick={() => removeTask(t.id)}>X</button>
         </li>)
 
     return (
