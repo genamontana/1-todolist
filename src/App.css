@@ -1,3 +1,4 @@
+
 .App {
   padding: 30px;
   display: flex;
@@ -7,17 +8,19 @@
   margin-right: 50px;
 }
 
-.btn-active{
-  background-color: chocolate;
-  color: white;
+.error {
+  border: red 1px solid;
 }
 
-.task-done{
-  font-weight: bold;
+.error-message {
+  color: red;
+}
+
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
   opacity: 0.5;
 }
 
-.input-error{
-  border: 2px red solid;
-  outline: none;
-}
