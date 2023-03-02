@@ -5,6 +5,7 @@ import {EditableSpan} from './EditableSpan';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import {SuperCheckBox} from './components/SuperCheckBox';
 
 export type TaskType = {
     id: string
@@ -42,6 +43,10 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter('active', props.id);
     const onCompletedClickHandler = () => props.changeFilter('completed', props.id);
 
+    const changeStatusHandler = (tId: string, checkedValue: boolean) => {
+        props.changeTaskStatus(tId, checkedValue, props.id)
+    }
+
     return <div>
         <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>
             <IconButton aria-label="delete"
@@ -64,7 +69,8 @@ export function Todolist(props: PropsType) {
 
 
                     return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
-                        <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
+                        <SuperCheckBox isDone={t.isDone}
+                                       callBack={(checkedValue) => changeStatusHandler(t.id, checkedValue)}/>
                         <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
                         <IconButton onClick={onClickHandler}>
                             <DeleteIcon/>
