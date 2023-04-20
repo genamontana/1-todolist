@@ -18,7 +18,6 @@ export const Task = memo(({
                               removeTask,
                               changeTaskTitle
                           }: TaskPropsType) => {
-    console.log('task')
 
     const changeStatusHandler = (tId: string, checkedValue: boolean) => {
         changeTaskStatus(tId, checkedValue)
