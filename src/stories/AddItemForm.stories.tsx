@@ -42,7 +42,7 @@ const TemplateError: ComponentStory<typeof AddItemForm> = (args) => {
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (error) setError(null);
-        if (e.charCode === 13) {
+        if (e.key === 'Enter') {
             addItem();
         }
     }
@@ -50,7 +50,7 @@ const TemplateError: ComponentStory<typeof AddItemForm> = (args) => {
     return <div>
         <input value={title}
                onChange={onChange}
-               onKeyPress={onKeyPressHandler}
+               onKeyDown={onKeyPressHandler}
                className={error ? 'error' : ''}
         />
         <Button
