@@ -1,11 +1,14 @@
-import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
-import Button from '@mui/material/Button';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import { AddBox } from '@mui/icons-material';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-export const AddItemForm = memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
+    console.log('AddItemForm called')
 
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
@@ -24,29 +27,25 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (error) setError(null);
-        if (e.key === 'Enter') {
+        if (error !== null) {
+            setError(null);
+        }
+        if (e.charCode === 13) {
             addItem();
         }
     }
 
     return <div>
-        <input value={title}
-               onChange={onChangeHandler}
-               onKeyDown={onKeyPressHandler}
-               className={error ? 'error' : ''}
+        <TextField variant="outlined"
+                   error={!!error}
+                   value={title}
+                   onChange={onChangeHandler}
+                   onKeyPress={onKeyPressHandler}
+                   label="Title"
+                   helperText={error}
         />
-        <Button
-            style={{
-                maxWidth: '30px',
-                maxHeight: '30px',
-                minWidth: '30px',
-                minHeight: '30px'
-            }}
-            variant="contained"
-            onClick={addItem}>+
-        </Button>
-
-        {error && <div className="error-message">{error}</div>}
+        <IconButton color="primary" onClick={addItem}>
+            <AddBox/>
+        </IconButton>
     </div>
 })
