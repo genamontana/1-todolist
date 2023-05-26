@@ -174,7 +174,6 @@ export const changeTaskTC = (todoId: string, taskId: string, status: TaskStatuse
                 description: task.description,
                 status,
             }
-
             todolistsAPI.updateTask(todoId, taskId, model)
                 .then((res) => {
                     dispatch(changeTaskStatusAC(taskId, status, todoId))
